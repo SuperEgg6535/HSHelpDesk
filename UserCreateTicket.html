@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Helpdesk Ticketing System</title>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="containers">
+        <nav>
+            <ul>
+              <li style="float:left;"><a href="loginpage.html">HongSeng HelpDesk</a></li>
+            </ul>
+          </nav>
+          <div class="containers">
+
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>Helpdesk</h2>
+      </div>
+      <div class="sidebar-content">
+        <input type="text" placeholder="Search in all tickets...">
+        <ul>
+          <li><a href="userdashboard.html" >Dashboard</a></li>
+          <li><a href="user_tic.html" onclick="filterTickets('All')">All Tickets</a></li>
+          <li><a href="UserCreateTicket.html">Create Ticket</a></li>
+          <br>
+          <br>
+          <li><a href="loginpage.html">LogIn</a></li>
+        </ul>
+      </div>
+    </aside>
+    <main class="main-content">
+      <header class="main-header">
+        <h2>New Ticket</h2>
+      </header>
+
+      <div class="ticket-form">
+        <form id="new-ticket-form">
+          <input type="text" id="requester" placeholder="Requester" required>
+          <input type="text" id="email" placeholder="Email" required>
+          <select id="subject" required>
+            <option value="Software Issue">Software Issue</option>
+            <option value="Hardware Issue">Hardware Issue</option>
+            <option value="Request IT Stuff">Request IT Stuff</option>
+          </select>
+          <select id="assignee" required>
+            <option value="Auto Assign Technician">Auto Assign Technician</option>
+            <option value="Technician - Chng">Technician - Chng</option>
+            <option value="Technician - Eugene Tan">Technician - Eugene Tan</option>
+            <option value="Technician - Melvin Lim">Technician - Melvin Lim</option>
+          </select>
+          <select id="status" required>
+            <option value="Open">Open</option>
+          </select>
+          <!-- Ticket List <select id="status" required>
+            <option value="Open">Open</option>
+            <option value="On hold">On hold</option>
+            <option value="Solved">Solved</option>
+            <option value="Closed">Closed</option>
+          </select>
+          -->
+        <textarea id="message" rows="3" placeholder="Message" required></textarea>
+
+        <input type="file" id="attachment" accept=".jpg, .jpeg, .png, .pdf, .xlsx, .xls" multiple />
+
+          <button type="submit">Add Ticket</button>
+        </form>
+      </div>
+    </main>
+  </div>
+  <script src="app.js"></script>
+  <script src="tech.js"></script>
+  <script src="filter_sub.js"></script>
+</body>
+</html>
