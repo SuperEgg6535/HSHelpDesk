@@ -4,55 +4,68 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Helpdesk Ticketing System</title>
-  <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
+    <div class="containers">
+        <nav>
+            <ul>
+              <li style="float:left;"><a href="index.html">HongSeng HelpDesk</a></li>
+            </ul>
+          </nav>
+          <div class="containers">
 
-<!-- HTML Code for a menu bar -->
-<div class="containers">
-    <nav>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>Helpdesk</h2>
+      </div>
+      <div class="sidebar-content">
+        <input type="text" placeholder="Search in all tickets...">
         <ul>
-          <li style="float:left;"><a href="index.html">HongSeng HelpDesk</a></li>
-          <li><a href="#">Research</a></li>
-          <li><a href="#">People</a></li>
-          <li><a href="#">Publications</a></li>
+          <li><a href="dashboard.html" >Dashboard</a></li>
+          <li><a href="ticket.html" onclick="filterTickets('All')">All Tickets</a></li>
           <li><a href="CreateTicket.html">Create Ticket</a></li>
-          <li><a href="ticket.html">All Ticket</a></li>
+          <br>
+          <br>
+          <li><a href="loginpage.html">LogIn</a></li>
         </ul>
-      </nav>
-      <div class="containers">
- 
-    <!-- Ticket Submission Form -->
-    <div class="form-container">
-      <h2>Log In</h2>
-      <form id="login-form">
-        <label for="login-username">Username:</label>
-        <input style="width: 15%;" type="text" id="login-username" required>
-        
-        <label for="login-password">Password:</label>
-        <input style="width: 15%;" type="password" id="login-password" required>
-        
-        <button type="button" onclick="loginUser()">Login</button>
+      </div>
+    </aside>
+    
+    <main class="main-content">
+      <header class="main-header">
+        <h2>All Tickets</h2>
+        <div class="filter-options"> <button onclick="filterTickets('All')">All</button> 
+        <button onclick="filterTickets('Software Issue')">Software</button> 
+        <button onclick="filterTickets('Hardware Issue')">Hardware</button> 
+        <button onclick="filterTickets('Request IT Stuff')">Request</button> 
+      </div> 
+    </header>
 
-        if id ="adm" then <a href="#"></a>
-        else if 
-        else
-        0;
-      </form>
-    </div>
-    <p id="login-message"></p>
-    <!-- Ticket List -->
-    <div class="ticket-list">
-      <h2>Submitted Tickets</h2>
-      <ul id="ticketList"></ul>
-    </div>
+      <div class="ticket-list">
+        <table>
+          <thead>
+            <tr>
+              <th>Requester</th>
+              <th>Email</th>
+              <th>Subject</th>
+              <th>Assignee</th>
+              <th>Status</th>
+              <th>Last Message</th>
+            </tr>
+          </thead>
+          <tbody id="ticket-tbody">
+          </tbody>
+        </table>
+      </div>
+    </main>
   </div>
-
-
-  
   <script src="app.js"></script>
+  <script src="tech.js"></script>
+  <script src="filter_sub.js"></script>
+  <script src="req_detail.js"></script>
   <script src="login.js"></script>
 </body>
 </html>

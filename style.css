@@ -16,7 +16,7 @@ body {
 .container {
   display: flex;
   flex-grow: 1; /* Allow container to grow and fill space */
-}
+  width: 100%;}
 
 .sidebar {
   width: 250px; /* Fixed width for sidebar */
@@ -24,6 +24,7 @@ body {
   padding: 20px; /* Padding for content */
   height: 100%; /* Sidebar takes full height */
   overflow-y: auto; /* Enable scrolling if content overflows */
+  
 }
 
 .sidebar-header {
@@ -34,7 +35,7 @@ body {
 .sidebar-content {
   display: flex;
   flex-direction: column; /* Stack items vertically */
-  margin-bottom: 300px;
+  height: 100vh;
 }
 
 .sidebar-content input {
@@ -113,7 +114,6 @@ body {
   text-align: center; /* Center text */
   background-color: #fff; /* Background color */
   border-radius: 12px; /* Rounded corners */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Shadow for container */
 }
 
 nav {
@@ -209,4 +209,15 @@ footer {
   text-align: center; /* Center text */
   padding: 10px; /* Padding */
   position: relative; /* Position footer relative */
+}
+
+.image-container {
+  display: flex; /* Enable flexbox */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+.image-container img {
+  max-width: 100%; /* Ensure the image is responsive */
+  height: auto; /* Maintain aspect ratio */
 }

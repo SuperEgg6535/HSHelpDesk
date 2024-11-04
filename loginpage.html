@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Helpdesk Ticketing System</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<style>
+  button {
+    display: inline-block; /* Allows for padding and margins */
+    padding: 10px 20px; /* Padding: 10px top/bottom, 20px left/right */
+    font-size: 14px; /* Standard font size */
+    background-color: #007bff; /* Primary button color */
+    color: white; /* Text color */
+    border: none; /* Remove default border */
+    border-radius: 4px; /* Slightly rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth background color change on hover */
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Styles for links that should look like buttons */
+.button-link {
+    display: inline-block; /* Allows for padding and margins */
+    padding: 10px 20px; /* Padding: 10px top/bottom, 20px left/right */
+    font-size: 14px; /* Standard font size */
+    background-color: #007bff; /* Primary button color */
+    color: white; /* Text color */
+    text-decoration: none; /* Remove underline from link */
+    border-radius: 4px; /* Slightly rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth background color change on hover */
+}
+
+.button-link:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+
+</style>
+<body>
+<div class="containers">
+    <nav>
+        <ul>
+          <li style="float:left;"><a href="loginpage.html">HongSeng HelpDesk</a></li>
+        </ul>
+      </nav>
+      <div class="containers">
+ 
+    <!-- Ticket Submission Form -->
+    <div class="form-container">
+      <div class="image-container">
+        <img src="https://www.margma.com.my/wp-content/uploads/2023/04/6.png" alt="Description of Image" />
+    </div>
+      <h2>Log In</h2>
+      <br>
+      <form id="login-form">
+        <label style="text-align: center;" for="login-username">Username:</label>
+        <input style="width: 15%;" type="text" id="login-username" required>
+        
+        <label style="text-align: center;"  for="login-password">Password:</label>
+        <input style="width: 15%;" type="password" id="login-password" required>
+        <br>
+        
+        <button type="button" onclick="loginUser()">Login</button>
+        <br>
+        <br>
+        <a href="index.html" class="button-link">Back</button></a>
+
+      </form>
+    </div>
+    <p id="login-message"></p>
+  </div>
+
+
+  
+  <script src="app.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>

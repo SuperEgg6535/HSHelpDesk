@@ -41,9 +41,9 @@ function loginUser() {
 
             // Redirect based on user role
             if (user.Admin) {
-                window.location.href = 'dashboard.html'; // Admin page
+                window.location.href = 'loginpage.html'; // Admin page
             } else {
-                window.location.href = 'dashboard.html'; // Normal user page
+                window.location.href = 'index.html'; // Normal user page
             }
         } else {
             document.getElementById('login-message').textContent = 'Invalid username or password';
