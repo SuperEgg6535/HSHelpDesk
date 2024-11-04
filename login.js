@@ -41,7 +41,7 @@ function loginUser() {
 
             // Redirect based on user role
             if (user.Admin) {
-                window.location.href = 'loginpage.html'; // Admin page
+                window.location.href = 'dashboard.html'; // Admin page
             } else {
                 window.location.href = 'index.html'; // Normal user page
             }
