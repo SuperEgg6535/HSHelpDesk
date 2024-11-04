@@ -58,6 +58,6 @@ function loginUser() {
 function logoutUser() {
     localStorage.removeItem('loggedInUser');
     document.getElementById('login-message').textContent = 'You have been logged out';
-    window.location.href = 'reg_user.html'; 
+    window.location.href = 'index.html'; 
 }
 
