@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Helpdesk Ticketing System</title>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="containers">
+        <nav>
+            <ul>
+              <li style="float:left;"><a href="index.html">HongSeng HelpDesk</a></li>
+            </ul>
+          </nav>
+          <div class="containers">
+
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>Helpdesk</h2>
+      </div>
+      <div class="sidebar-content">
+        <input type="text" placeholder="Search in all tickets...">
+        <ul>
+            <li><a href="dashboard.html" >Dashboard</a></li>
+            <li><a href="ticket.html" onclick="filterTickets('All')">All Tickets</a></li>
+            <li><a href="CreateTicket.html">Create Ticket</a></li>
+            <li><a href="open_tic.html" onclick="filtersTickets('Open')">Open Ticket</a></li>
+            <li><a href="close.tic.html" onclick="filtersTickets('Closed')">Closed Ticket</a></li>
+            <li><a href="onhold.html" onclick="filtersTickets('On Hold')">On Hold</a></li>
+
+            <br>
+            <br>
+            <li><a href="reg_user.html">Register New User</a></li>
+            <li><a href="all_user.html" >All User</a></li>
+            <li><a href="index.html" onclick="logoutUser()">Logout</a></li>
+        </ul>
+      </div>
+    </aside>
+    
+    <main class="main-content">
+      <header class="main-header">
+        <h2>All Tickets</h2>
+        <div class="filter-options"> <button onclick="filterTickets('All')">All</button> 
+        <button onclick="filterTickets('Software Issue')">Software</button> 
+        <button onclick="filterTickets('Hardware Issue')">Hardware</button> 
+        <button onclick="filterTickets('Request IT Stuff')">Request</button> 
+      </div> 
+    </header>
+
+      <div class="ticket-list">
+        <table>
+          <thead>
+            <tr>
+              <th>Requester</th>
+              <th>Email</th>
+              <th>Subject</th>
+              <th>Assignee</th>
+              <th>Status</th>
+              <th>Create Date</th>
+            </tr>
+          </thead>
+          <tbody id="ticket-tbody">
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+  <script src="app.js"></script>
+  <script src="tech.js"></script>
+  <script src="onhold.js"></script>
+  <script src="req_detail.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>

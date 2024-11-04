@@ -1,0 +1,172 @@
+/* Base Reset and Font Setup */
+
+/* Add a black background color to the top navigation */
+/* CSS Code to style the menu bar */
+nav {
+  background-color: #007bff; /* Sets the background color */
+  overflow: hidden;
+  text-align: center;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  float: right;
+}
+
+nav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+nav li a:hover {
+  background-color: #111;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f6f8;
+    color: #444;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  /* Container */
+  .container {
+    max-width: max;
+    width: 100%;
+
+
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Headers */
+  h1, h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    font-weight: 700;
+    color: #007bff;
+  }
+  
+  h2 {
+    font-weight: 500;
+    color: #333;
+  }
+  
+  /* Form Container */
+  .form-container {
+    padding: 20px;
+    background-color: #fafafa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+  }
+  
+  /* Form Elements */
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  input:focus, textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+  }
+  
+  button {
+    display: block;
+    width: 15%;
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: auto;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  button:active {
+    background-color: #004080;
+  }
+  
+  /* Ticket List */
+  .ticket-list {
+    padding: 20px;
+  }
+  
+  .ticket-list ul {
+    list-style-type: none;
+  }
+  
+  .ticket-item {
+    padding: 16px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+  }
+  
+  .ticket-item:hover {
+    transform: scale(1.02);
+  }
+  
+  .ticket-item h3 {
+    margin-bottom: 8px;
+    font-size: 1.2em;
+    color: #333;
+  }
+  
+  .ticket-item p {
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  .ticket-item p small {
+    font-size: 0.85em;
+    color: #777;
+  }
+  
+  a {
+    color: inherit;
+    text-decoration: none;
+  }

@@ -1,0 +1,212 @@
+* {
+  box-sizing: border-box; /* Make box sizing consistent */
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack children vertically */
+  height: 100vh; /* Full height of the viewport */
+}
+
+.container {
+  display: flex;
+  flex-grow: 1; /* Allow container to grow and fill space */
+}
+
+.sidebar {
+  width: 250px; /* Fixed width for sidebar */
+  background-color: #f4f4f4; /* Background color */
+  padding: 20px; /* Padding for content */
+  height: 100%; /* Sidebar takes full height */
+  overflow-y: auto; /* Enable scrolling if content overflows */
+}
+
+.sidebar-header {
+  font-size: 1.5em; /* Font size for header */
+  margin-bottom: 20px; /* Space below header */
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  margin-bottom: 300px;
+}
+
+.sidebar-content input {
+  margin-bottom: 20px; /* Space between input fields */
+  padding: 10px; /* Padding inside input */
+  font-size: 14px; /* Font size */
+}
+
+.sidebar-content ul {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0; /* Remove padding */
+}
+
+.sidebar-content ul li {
+  margin-bottom: 10px; /* Space between list items */
+  padding: 10px; /* Padding inside list item */
+  background-color: #e9e9e9; /* Background color for list item */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.sidebar-content ul li span {
+  float: right; /* Align span to the right */
+}
+
+.main-content {
+  flex-grow: 1; /* Allow main content to take remaining space */
+  padding: 20px; /* Padding around main content */
+  height: 100%; /* Ensure main content takes full height */
+  overflow-y: auto; /* Enable scrolling if content overflows */
+}
+
+.main-header {
+  display: flex; /* Flexbox for header layout */
+  justify-content: space-between; /* Space between items */
+  align-items: center; /* Center items vertically */
+  margin-bottom: 20px; /* Space below header */
+}
+
+.filter-options button {
+  margin-right: 10px; /* Space between buttons */
+  padding: 10px 20px; /* Padding for buttons */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.ticket-list table {
+  width: 100%; /* Full width for table */
+  border-collapse: collapse; /* Remove space between table cells */
+}
+
+.ticket-list th, .ticket-list td {
+  padding: 10px; /* Padding for table cells */
+  border: 1px solid #ddd; /* Border for table cells */
+}
+
+.ticket-list .status {
+  text-transform: capitalize; /* Capitalize text */
+}
+
+.ticket-form {
+  margin-top: 20px; /* Space above ticket form */
+}
+
+.ticket-form input,
+.ticket-form select,
+.ticket-form button {
+  display: block; /* Block display for form elements */
+  width: 100%; /* Full width for form elements */
+  padding: 10px; /* Padding inside form elements */
+  margin-bottom: 10px; /* Space below form elements */
+  font-size: 14px; /* Font size */
+}
+
+.containers {
+  max-width: 100%; /* Full width for containers */
+  width: 100%;
+  text-align: center; /* Center text */
+  background-color: #fff; /* Background color */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Shadow for container */
+}
+
+nav {
+  background-color: #007bff; /* Background color for nav */
+  overflow: hidden; /* Hide overflow */
+  text-align: center; /* Center text in nav */
+}
+
+nav ul {
+  list-style-type: none; /* Remove bullet points */
+  margin: 0; /* Remove margin */
+  padding: 0; /* Remove padding */
+}
+
+nav li {
+  float: right; /* Align nav items to the right */
+}
+
+nav li a {
+  display: block; /* Block display for links */
+  color: white; /* Text color */
+  text-align: center; /* Center text */
+  padding: 14px 16px; /* Padding for links */
+  text-decoration: none; /* Remove underline */
+}
+
+nav li a:hover {
+  background-color: #111; /* Background color on hover */
+}
+
+label {
+  display: block; /* Block display for labels */
+  font-weight: 500; /* Font weight for labels */
+  color: #333; /* Text color for labels */
+  text-align: left; /* Align text to left */
+}
+
+input,
+textarea {
+  width: 100%; /* Full width for inputs and textareas */
+  padding: 15px; /* Padding for inputs and textareas */
+  margin-bottom: 15px; /* Space below inputs and textareas */
+  border: 1px solid #ddd; /* Border for inputs and textareas */
+  border-radius: 8px; /* Rounded corners */
+  outline: none; /* Remove outline */
+  transition: all 0.3s ease; /* Transition effect */
+}
+
+input:focus,
+textarea:focus {
+  border-color: #007bff; /* Border color on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.2); /* Shadow on focus */
+}
+
+a {
+  color: inherit; /* Inherit color from parent */
+  text-decoration: none; /* Remove underline */
+}
+
+.checkbox-container {
+  display: flex; /* Flexbox for checkbox container */
+  align-items: left; /* Align items to left */
+}
+
+.checkbox-container input[type="checkbox"] {
+  width: 20px; /* Size of the checkbox */
+  height: 16px; /* Size of the checkbox */
+  margin-right: 10px; /* Space between checkbox and label */
+}
+
+.checkbox-container label {
+  cursor: pointer; /* Pointer on hover */
+  font-size: 16px; /* Font size */
+}
+
+.ticket-list button[type="submit"] {
+  display: block; /* Block display for submit button */
+  width: 15%; /* Width for submit button */
+  padding: 12px; /* Padding for submit button */
+  background-color: #007bff; /* Background color for submit button */
+  color: #fff; /* Text color for submit button */
+  border: none; /* No border for submit button */
+  border-radius: 8px; /* Rounded corners for submit button */
+  font-size: 16px; /* Font size for submit button */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Transition effect */
+  margin: auto; /* Center align submit button */
+}
+
+/* Footer styles */
+footer {
+  background-color: #f1f1f1; /* Light gray background */
+  text-align: center; /* Center text */
+  padding: 10px; /* Padding */
+  position: relative; /* Position footer relative */
+}

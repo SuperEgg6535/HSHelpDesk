@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket Detail</title>
+  <link rel="stylesheet" href="detail_sty.css">
+</head>
+<body>
+  <div class="ticket-detail-container">
+    <div class="ticket-content">
+      <h2 id="ticket-subject">Ticket Subject</h2>
+      <p><strong>Created by:</strong> <span id="ticket-creator">Requester Name</span></p>
+      <p><strong>Email:</strong> <span id="ticket-email"></span></p>
+      <div class="requester-message">
+        <h4>Requester's Message</h4>
+        <hr>
+        <p id="requester-message"></p>
+        <div id="attachments"></div> 
+      </div>
+      <div id="replies-container">
+        <h4>Replies</h4>
+        <hr>
+        <div id="replies"></div> <!-- This will display all replies -->
+        <hr>
+      </div>
+      <div class="ticket-actions">
+        <button onclick="showReplyBox()">Reply</button>
+        <button>Add note</button>
+        <button>Forward</button>
+      </div>
+      <div id="reply-box" style="display: none; margin-top: 10px;">
+        <textarea id="reply-message" placeholder="Type your reply here..." rows="4" style="width: 100%;"></textarea>
+        <button onclick="sendReply()">Send</button>
+      </div>
+      <div id="solution-modal" style="display:none;">
+        <div>
+            <h3>Enter the Solution</h3>
+            <textarea id="solution-message" placeholder="Enter the solution for this ticket..." rows="4"></textarea>
+            <button onclick="saveSolution()">Save Solution</button>
+            <button onclick="closeSolutionModal()">Cancel</button>
+        </div>
+    </div>
+    </div>
+    
+    
+
+    <div class="ticket-sidebar">
+      <div class="ticket-status">
+        <h3>Status: <span id="ticket-status-display">Open</span></h3>
+        <p><strong>Create Date:</strong> <span id="creation-date"></span></p>
+        <p><strong>Close Date:</strong> <span id="closure-date"></span></p>
+      </div>
+      <div class="properties">
+        <h4>Properties</h4>
+        <strong>Technician:</strong><br>
+        <p style="display: none;"><span id="original-technician"></span></p>
+          <select id="ticket-technician">
+          </select>
+        </p>
+        <p><strong>Status:</strong> 
+          <select id="ticket-status">
+            <option value="Open">Open</option>
+            <option value="On hold">On hold</option>
+            <option value="Closed">Closed</option>
+          </select>
+        </p>
+        <p><strong>Type:</strong> <span id="ticket-type">Question</span></p>
+        <p><strong>Priority:</strong> <span id="ticket-priority">Low</span></p>
+    
+        <button onclick="saveTicketChanges()">Update</button>
+    </div>
+    
+
+  <script src="req_detail.js"></script>
+  <script src="pic_attach.js"></script>
+
+</body>
+</html>

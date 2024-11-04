@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            background-color: #ffffff;
+        }
+
+        .main-content {
+            padding: 20px;
+            height: 100vh;
+            overflow-y: auto;
+            display: flex; /* Use flexbox for layout */
+            flex-direction: column; /* Stack children vertically */
+        }
+
+        .ticket-list {
+            display: flex; /* Enable flex layout for ticket list */
+            flex: 1; /* Allow it to take available space */
+        }
+
+        .table-container {
+            flex: 1; /* Table takes available space */
+            margin-right: 20px; /* Space between table and chart */
+        }
+
+        #myChart {
+            max-width: 400px;
+            max-height: 400px;
+            margin: auto;
+            margin-top: 27px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-header {
+            margin-bottom: 20px; /* Add margin to separate from content below */
+        }
+    </style>
+</head>
+<body>
+    <div class="containers">
+        <nav>
+            <ul>
+                <li style="float:left;"><a href="index.html">HongSeng HelpDesk</a></li>
+            </ul>
+        </nav>
+        <div class="containers">
+            <div class="container">
+                <aside class="sidebar">
+                    <div class="sidebar-header">
+                        <h2>Helpdesk</h2>
+                    </div>
+                    <div class="sidebar-content">
+                        <input type="text" placeholder="Search in all tickets...">
+                        <ul style="list-style-type: none; padding: 0;">
+                            <li><a href="dashboard.html">Dashboard</a></li>
+                            <li><a href="ticket.html" onclick="filterTickets('All')">All Tickets</a></li>
+                            <li><a href="CreateTicket.html">Create Ticket</a></li>
+                            <li><a href="open_tic.html" onclick="filtersTickets('Open')">Open Ticket</a></li>
+                            <li><a href="close.tic.html" onclick="filtersTickets('Closed')">Closed Ticket</a></li>
+                            <li><a href="onhold.html" onclick="filtersTickets('On Hold')">On Hold</a></li>
+                            <br>
+                            <br>
+                            <li><a href="reg_user.html">Register New User</a></li>
+                            <li><a href="all_user.html">All User</a></li>
+                            <li><a href="index.html" onclick="logoutUser()">Logout</a></li>
+                        </ul>
+                    </div>
+                </aside>
+
+                <main class="main-content">
+                    <header class="main-header">
+                      <h2>Summary</h2>
+                    </header>
+                    <div class="ticket-list">
+                        <div class="table-container">
+                            <table>
+                                <h2 style="text-align: left;">Daily Ticket</h2>
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Count</th>
+                                        <th>Percentage</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ticket-stats">
+                                    <tr>
+                                        <td>Software Issue</td>
+                                        <td id="software-count">0</td>
+                                        <td id="software-percentage">0%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hardware Issue</td>
+                                        <td id="hardware-count">0</td>
+                                        <td id="hardware-percentage">0%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Request IT Stuff</td>
+                                        <td id="request-count">0</td>
+                                        <td id="request-percentage">0%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table>
+                                <h2 style="text-align: left;">Yesterday Ticket</h2>
+                                <thead>
+                                    <tr>
+                                        <th>Category (Yesterday)</th>
+                                        <th>Count</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="yesterday-ticket-stats">
+                                    <tr>
+                                        <td>Software Issue</td>
+                                        <td id="yesterday-software-count">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hardware Issue</td>
+                                        <td id="yesterday-hardware-count">0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Request IT Stuff</td>
+                                        <td id="yesterday-request-count">0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <canvas id="myChart"></canvas>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+    <script>
+   document.addEventListener('DOMContentLoaded', () => {
+    // Initialize counts
+    let softwareCount = 0, hardwareCount = 0, requestCount = 0;
+
+    // Function to calculate and update ticket stats
+    const calculateTicketStats = () => {
+        const tickets = JSON.parse(localStorage.getItem('tickets')) || [];
+        const today = new Date().toLocaleDateString();
+        const yesterday = new Date(Date.now() - 864e5).toLocaleDateString();
+        let dailyStats = JSON.parse(localStorage.getItem('dailyStats')) || {};
+
+        // Initialize today's counts if they do not exist
+        if (!dailyStats[today]) {
+            dailyStats[today] = { softwareCount: 0, hardwareCount: 0, requestCount: 0 };
+        }
+
+        // Reset counts
+        softwareCount = 0;
+        hardwareCount = 0;
+        requestCount = 0;
+
+        tickets.forEach(ticket => {
+            const subject = ticket.subject.toLowerCase();
+            if (subject.includes("software")) softwareCount++;
+            else if (subject.includes("hardware")) hardwareCount++;
+            else if (subject.includes("request")) requestCount++;
+        });
+
+        dailyStats[today] = { softwareCount, hardwareCount, requestCount };
+        localStorage.setItem('dailyStats', JSON.stringify(dailyStats));
+
+        // Check and update yesterday's counts if a day has passed
+        const lastUpdateDate = localStorage.getItem('lastUpdateDate');
+        if (lastUpdateDate && lastUpdateDate !== today) {
+            // Move today's counts to yesterday's counts
+            if (!dailyStats[yesterday]) {
+                dailyStats[yesterday] = { softwareCount: 0, hardwareCount: 0, requestCount: 0 };
+            }
+
+            dailyStats[yesterday].softwareCount += softwareCount;
+            dailyStats[yesterday].hardwareCount += hardwareCount;
+            dailyStats[yesterday].requestCount += requestCount;
+
+            // Reset today's counts
+            dailyStats[today] = { softwareCount: 0, hardwareCount: 0, requestCount: 0 };
+
+            localStorage.setItem('dailyStats', JSON.stringify(dailyStats));
+        }
+
+        // Update last update date
+        localStorage.setItem('lastUpdateDate', today);
+
+        const yesterdayCounts = dailyStats[yesterday] || { softwareCount: 0, hardwareCount: 0, requestCount: 0 };
+
+        // Update the displayed counts
+        document.getElementById('software-count').textContent = dailyStats[today].softwareCount;
+        document.getElementById('hardware-count').textContent = dailyStats[today].hardwareCount;
+        document.getElementById('request-count').textContent = dailyStats[today].requestCount;
+
+        document.getElementById('yesterday-software-count').textContent = yesterdayCounts.softwareCount;
+        document.getElementById('yesterday-hardware-count').textContent = yesterdayCounts.hardwareCount;
+        document.getElementById('yesterday-request-count').textContent = yesterdayCounts.requestCount;
+
+        const totalTickets = softwareCount + hardwareCount + requestCount;
+        if (totalTickets > 0) {
+            document.getElementById('software-percentage').textContent = ((softwareCount / totalTickets) * 100).toFixed(2) + '%';
+            document.getElementById('hardware-percentage').textContent = ((hardwareCount / totalTickets) * 100).toFixed(2) + '%';
+            document.getElementById('request-percentage').textContent = ((requestCount / totalTickets) * 100).toFixed(2) + '%';
+        }
+
+        createPieChart(softwareCount, hardwareCount, requestCount, yesterdayCounts);
+    };
+
+    // Function to create pie chart
+    const createPieChart = (softwareCount, hardwareCount, requestCount, yesterdayCounts) => {
+        const ctx = document.getElementById('myChart').getContext('2d');
+        if (window.myPieChart) window.myPieChart.destroy();
+
+        window.myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Software Issues', 'Hardware Issues', 'Request IT Stuff', 'Yesterday Total'],
+                datasets: [{
+                    label: 'Ticket Count',
+                    data: [softwareCount, hardwareCount, requestCount, yesterdayCounts.softwareCount + yesterdayCounts.hardwareCount + yesterdayCounts.requestCount],
+                    backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(153, 102, 255, 0.6)', 'rgba(255, 159, 64, 0.6)', 'rgba(255, 99, 132, 0.6)'],
+                    borderColor: ['rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)', 'rgba(255, 99, 132, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: {
+                        callbacks: {
+                            label: (context) => `${context.label}: ${context.raw} tickets`
+                        }
+                    }
+                }
+            }
+        });
+    };
+
+    // Initial call and setInterval for refreshing stats
+    calculateTicketStats(); // Initial call
+    setInterval(calculateTicketStats, 60000); // Refresh every minute
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User List</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 1; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      overflow: auto; 
+      background-color: rgba(0,0,0,0.4); 
+      padding-top: 60px;
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto; 
+      padding: 20px;
+      border: 1px solid #888;
+      width: 300px; 
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+    <div class="containers">
+        <nav>
+            <ul>
+              <li style="float:left;"><a href="index.html">HongSeng HelpDesk</a></li>
+            </ul>
+          </nav>
+          <div class="containers">
+
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>Helpdesk</h2>
+      </div>
+      <div class="sidebar-content">
+        <input type="text" placeholder="Search in all tickets...">
+        <ul>
+          <li><a href="dashboard.html" >Dashboard</a></li>
+          <li><a href="ticket.html" onclick="filterTickets('All')">All Tickets</a></li>
+          <li><a href="CreateTicket.html">Create Ticket</a></li>
+          <li><a href="open_tic.html" onclick="filtersTickets('Open')">Open Ticket</a></li>
+          <li><a href="close.tic.html" onclick="filtersTickets('Closed')">Closed Ticket</a></li>
+          <li><a href="onhold.html" onclick="filtersTickets('On Hold')">On Hold</a></li>
+          <br>
+          <br>
+          <li><a href="reg_user.html">Register New User</a></li>
+          <li><a href="all_user.html" >All User</a></li>
+          <li><a href="index.html" onclick="logoutUser()">Logout</a></li>
+        </ul>
+      </div>
+    </aside>
+    
+    <main class="main-content">
+      <header class="main-header">
+        <h2>User List</h2>
+      </header>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Action</th> <!-- Add action column for reset password -->
+          </tr>
+        </thead>
+        <tbody id="user-list">
+          <!-- User rows will be inserted here -->
+        </tbody>
+      </table>
+
+      <!-- Modal for Reset Password -->
+      <div id="resetModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <h3>Reset Password</h3>
+          <input type="text" id="new-password" placeholder="Enter new password" required>
+          <button onclick="resetPassword()">Reset Password</button>
+        </div>
+      </div>
+
+      <script>
+        let currentUsername; // To keep track of the user being reset
+
+        function loadUsers() {
+          const users = JSON.parse(localStorage.getItem('users')) || [];
+          const userList = document.getElementById('user-list');
+          userList.innerHTML = ''; // Clear existing rows
+
+          users.forEach(user => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${user.name}</td>
+              <td>${user.username}</td>
+              <td>${user.password}</td>
+              <td>
+                <button onclick="openModal('${user.username}')">Reset Password</button>
+                <button onclick="deleteUser('${user.username}')">Delete User</button>
+              </td>
+            `;
+            userList.appendChild(row);
+          });
+
+          if (users.length === 0) {
+            const row = document.createElement('tr');
+            row.innerHTML = '<td colspan="4">No users found</td>';
+            userList.appendChild(row);
+          }
+        }
+
+        function openModal(username) {
+          currentUsername = username; // Store the username for resetting
+          document.getElementById('resetModal').style.display = 'block';
+        }
+
+        function closeModal() {
+          document.getElementById('resetModal').style.display = 'none';
+          document.getElementById('new-password').value = ''; // Clear the password field
+        }
+
+        function resetPassword() {
+          const newPassword = document.getElementById('new-password').value.trim();
+
+          if (newPassword) {
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            const userIndex = users.findIndex(user => user.username === currentUsername);
+            
+            if (userIndex !== -1) {
+              users[userIndex].password = newPassword; // Reset the password
+              localStorage.setItem('users', JSON.stringify(users));
+              alert(`Password for ${currentUsername} has been reset.`);
+              closeModal(); // Close the modal
+              
+              loadUsers(); // Refresh the user list
+            }
+          } else {
+            alert("Please enter a new password.");
+          }
+        }
+
+        function deleteUser(username) {
+          if (confirm(`Are you sure you want to delete user ${username}?`)) {
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            users = users.filter(user => user.username !== username); // Remove user
+            localStorage.setItem('users', JSON.stringify(users)); // Update local storage
+            alert(`User ${username} has been deleted.`);
+            loadUsers(); // Refresh the user list
+          }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadUsers);
+      </script>
+    </main>
+  </div>
+</div>
+</div>
+</body>
+</html>
